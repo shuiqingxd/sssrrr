@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find slavedarm_config)/launch/demo.launch">
+  </include>
+  <node name="group_interface" pkg="moveit_myarm" type="group_interface" respawn="false" output="screen">
+  </node>
+
+</launch>

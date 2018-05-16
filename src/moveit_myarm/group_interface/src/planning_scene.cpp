@@ -52,14 +52,14 @@
 // the PR2 robot is at a positive or negative angle:
 bool userCallback(const robot_state::RobotState& kinematic_state, bool verbose)
 {
-  const double* joint_values = kinematic_state.getJointPositions("r_shoulder_pan_joint");
+  const double* joint_values = kinematic_state.getJointPositions("arm5_arm6_Joint");
   return (joint_values[0] > 0.0);
 }
 // END_SUB_TUTORIAL
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "right_arm_kinematics");
+  ros::init(argc, argv, "arm_kinematics");
   ros::AsyncSpinner spinner(1);
   spinner.start();
 
@@ -130,7 +130,7 @@ int main(int argc, char** argv)
   // for this specifically by adding the group name "right_arm" to the
   // collision request.
 
-  collision_request.group_name = "right_arm";
+  collision_request.group_name = "arm";
   current_state.setToRandomPositions();
   collision_result.clear();
   planning_scene.checkSelfCollision(collision_request, collision_result);
@@ -145,7 +145,7 @@ int main(int argc, char** argv)
   // check for directly.
 
   std::vector<double> joint_values;
-  const robot_model::JointModelGroup* joint_model_group = current_state.getJointModelGroup("right_arm");
+  const robot_model::JointModelGroup* joint_model_group = current_state.getJointModelGroup("arm");
   current_state.copyJointGroupPositions(joint_model_group, joint_values);
   joint_values[0] = 1.57;  // hard-coded since we know collisions will happen here
   current_state.setJointGroupPositions(joint_model_group, joint_values);
@@ -244,7 +244,7 @@ int main(int argc, char** argv)
   desired_pose.pose.position.x = 0.75;
   desired_pose.pose.position.y = -0.185;
   desired_pose.pose.position.z = 1.3;
-  desired_pose.header.frame_id = "base_footprint";
+  desired_pose.header.frame_id = "base";
   moveit_msgs::Constraints goal_constraint =
       kinematic_constraints::constructGoalConstraints(end_effector_name, desired_pose);
 

@@ -1,7 +1,7 @@
-#add_executable(planning_scene_tutorial src/planning_scene_tutorial.cpp)
-#target_link_libraries(planning_scene_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-#install(TARGETS planning_scene_tutorial DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-#
+add_executable(planning_scene src/planning_scene.cpp)
+target_link_libraries(planning_scene ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+install(TARGETS planning_scene DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
 #add_executable(planning_scene_ros_api_tutorial src/planning_scene_ros_api_tutorial.cpp)
 #target_link_libraries(planning_scene_ros_api_tutorial ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 #install(TARGETS planning_scene_ros_api_tutorial DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

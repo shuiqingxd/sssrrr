@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find slavedarm_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <node name="kinematic_model"
+        pkg="moveit_myarm"
+        type="kinematic_model"
+        respawn="false" output="screen">
+    <rosparam command="load"
+              file="$(find slavedarm_config)/config/kinematics.yaml"/>
+  </node>
+</launch>

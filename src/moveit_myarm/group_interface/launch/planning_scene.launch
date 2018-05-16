@@ -1,0 +1,15 @@
+<launch>
+
+    <arg name="kinect" default="true"/>
+    <!-- send slavedarm urdf to param server -->
+      <param name="robot_description" command="load" file="$(find slaved_arm/urdf/slaved_arm.urdf" />
+   <!-- <group unless="$(arg kinect)">
+      <param name="robot_description" command="$(find xacro)/xacro.py '$(find pr2_description)/robots/pr2_no_kinect.urdf.xacro'" />
+    </group>
+   -->
+  <include file="$(find slavedarm_config)/launch/planning_context.launch"/>
+
+  <node name="planning_scene" pkg="moveit_myarm" type="planning_scene" respawn="false" output="screen">
+    <rosparam command="load" file="$(find slavedarm_config)/config/kinematics.yaml"/>
+  </node>
+</launch>

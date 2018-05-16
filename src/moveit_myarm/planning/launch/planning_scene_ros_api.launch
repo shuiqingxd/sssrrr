@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find slavedarm_config)/launch/demo.launch"/>
+
+  <node name="planning_scene_ros_api" pkg="moveit_myarm" type="planning_scene_ros_api" respawn="false" output="screen">
+  </node>
+
+</launch>

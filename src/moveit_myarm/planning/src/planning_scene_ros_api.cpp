@@ -50,12 +50,12 @@
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "planning_scene_ros_api_tutorial");
+  ros::init(argc, argv, "planning_scene_ros_api");
   ros::AsyncSpinner spinner(1);
   spinner.start();
 
   ros::NodeHandle node_handle;
-  ros::Duration sleep_time(10.0);
+  ros::Duration sleep_time(5.0);
   sleep_time.sleep();
   sleep_time.sleep();
 
@@ -84,15 +84,18 @@ int main(int argc, char **argv)
   // subtract the object from the world
   // and to attach the object to the robot
   moveit_msgs::AttachedCollisionObject attached_object;
-  attached_object.link_name = "r_wrist_roll_link";
+  attached_object.link_name = "arm6_Link";
   /* The header must contain a valid TF frame*/
-  attached_object.object.header.frame_id = "r_wrist_roll_link";
+  attached_object.object.header.frame_id = "base_link";
   /* The id of the object */
   attached_object.object.id = "box";
 
   /* A default pose */
   geometry_msgs::Pose pose;
   pose.orientation.w = 1.0;
+  pose.position.x = 0.0;
+  pose.position.y = 0.0;
+  pose.position.z = -1.0;
 
   /* Define a box to be attached */
   shape_msgs::SolidPrimitive primitive;
@@ -159,17 +162,18 @@ int main(int argc, char **argv)
   /* First, define the REMOVE object message*/
   moveit_msgs::CollisionObject remove_object;
   remove_object.id = "box";
-  remove_object.header.frame_id = "odom_combined";
+  remove_object.header.frame_id = "base_link";
   remove_object.operation = remove_object.REMOVE;
 
   // Note how we make sure that the diff message contains no other
   // attached objects or collisions objects by clearing those fields
   // first.
   /* Carry out the REMOVE + ATTACH operation */
-  ROS_INFO("Attaching the object to the right wrist and removing it from the world.");
+  ROS_INFO("Attaching the object to the arm6 and removing it from the world.");
   planning_scene.world.collision_objects.clear();
   planning_scene.world.collision_objects.push_back(remove_object);
   planning_scene.robot_state.attached_collision_objects.push_back(attached_object);
+  planning_scene.is_diff = true;
   planning_scene_diff_publisher.publish(planning_scene);
 
   sleep_time.sleep();
@@ -183,7 +187,7 @@ int main(int argc, char **argv)
   /* First, define the DETACH object message*/
   moveit_msgs::AttachedCollisionObject detach_object;
   detach_object.object.id = "box";
-  detach_object.link_name = "r_wrist_roll_link";
+  detach_object.link_name = "arm6_Link";
   detach_object.object.operation = attached_object.object.REMOVE;
 
   // Note how we make sure that the diff message contains no other

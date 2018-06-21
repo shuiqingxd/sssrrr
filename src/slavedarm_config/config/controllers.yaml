@@ -1,0 +1,22 @@
+controller_list:
+
+ - name: slave_controller
+   action_ns: follow_joint_trajectory
+   type: FollowJointTrajectory
+   default: true
+   joints:
+     - base_arm1_Joint
+     - arm1_arm2_Joint
+     - arm2_arm3_Joint
+     - arm3_arm4_Joint
+     - arm4_arm5_Joint
+     - arm5_arm6_Joint
+
+# - name: hand_controller
+#   action_ns: gripper_action
+#   type: GripperCommand
+#   default: true
+#   parallel: true
+#   joints:
+#     - panda_finger_joint1
+#     - panda_finger_joint2

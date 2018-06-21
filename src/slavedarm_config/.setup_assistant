@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: slaved_arm
+    relative_path: urdf/slaved_arm.urdf
+  SRDF:
+    relative_path: config/slaved_arm.srdf
+  CONFIG:
+    author_name: gxdhqn
+    author_email: gxdhqn@126.com
+    generated_timestamp: 1524989351

@@ -1,0 +1,1 @@
+controller_joint_names: [base_arm1_Joint, arm1_arm2_Joint, arm2_arm3_Joint, arm3_arm4_Joint, arm4_arm5_Joint, arm5_arm6_Joint]

@@ -1,0 +1,18 @@
+joints: {
+    base_arm1_Joint: { id: 1, max_angle: 180, min_angle: -180, max_speed: 90 },
+    arm1_arm2_Joint: { id: 2, max_angle: 130, min_angle: -130, max_speed: 90 },
+    arm2_arm3_Joint: { id: 3, max_angle: 130, min_angle: -130, max_speed: 90 },
+    arm3_arm4_Joint: { id: 4, max_angle: 180, min_angle: -180, max_speed: 90 },
+    arm4_arm5_Joint: { id: 5, max_angle: 130, min_angle: -130, max_speed: 90 },
+    arm5_arm6_Joint: { id: 6, max_angle: 180, min_angle: -180, max_speed: 90 },
+
+}
+controllers: {
+    slave_controller: {type: follow_controller, joints: [  base_arm1_Joint,
+                                                         arm1_arm2_Joint,
+                                                         arm2_arm3_Joint,
+                                                         arm3_arm4_Joint,
+                                                         arm4_arm5_Joint,
+                                                         arm5_arm6_Joint],
+    action_name: slave_controller/follow_joint_trajectory, onboard: False}
+}
